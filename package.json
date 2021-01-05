@@ -14,8 +14,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest --coverage",
+    "test:watch": "jest --watch",
     "eject": "react-scripts eject",
+    "prepush": "npm run lint && npm test",
     "test:integration": "jest -c jest-integration.config.js"
   },
   "eslintConfig": {
@@ -36,7 +38,25 @@
       "last 1 safari version"
     ]
   },
+  "jest": {
+    "collectCoverageFrom": [
+      "*.js"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "statements": 100,
+        "branches": 100,
+        "functions": 100,
+        "lines": 100
+      }
+    }
+  },
   "devDependencies": {
+    "eslint": "^7.17.0",
+    "husky": "^4.3.6",
     "jest": "^26.6.3",
     "jest-puppeteer": "^4.4.0",
     "puppeteer": "^5.5.0"
